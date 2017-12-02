@@ -12,19 +12,19 @@ using namespace std;
  * @param str Class name
  * @return Resource instance.
  */
-void* ObjectPool::getResource(string str)
+Resource* ObjectPool::getResource(string str)
 {
     map<std::string,std::list<void*> >::iterator itr=resources.find(str);
     if (itr==resources.end())
     {
         std::cout << "Creating new." << std::endl;
-        return instance->g_factory->construct(str);
+        return (Resource*)(instance->g_factory->construct(str));
     }
     else
     {
         std::cout << "Reusing existing." << std::endl;
         
-        void* resource = itr->second.front();
+        Resource* resource = (Resource*)itr->second.front();
         itr->second.pop_front();
         return resource;
     }

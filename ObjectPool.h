@@ -4,6 +4,7 @@
 #include <map>
 #include <iterator>
 #include"Factory.h"
+#include"Resource.h"
 #ifndef ObjPl
 #define ObjPl
 /* Note, that this class is a singleton. */
@@ -42,7 +43,7 @@ class ObjectPool
          * @param str Class name
          * @return Resource instance.
          */
-        void* getResource(std::string str);
+        Resource* getResource(std::string str);
         
         
         /**

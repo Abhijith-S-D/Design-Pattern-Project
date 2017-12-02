@@ -2,27 +2,26 @@
 #define Res
 class Resource
 {
-    int value;
 
     public:
         Resource()
         {
-            value = 0;
         }
 
-        void reset()
+        virtual void reset()
         {
-            value = 0;
         }
 
-        int getValue()
+        virtual void* getValue()
         {
-            return value;
         }
 
-        void setValue(int number)
+        virtual void setValue(const void*)
         {
-            value = number;
+        }
+        
+        virtual ~Resource()
+        {
         }
 };
 

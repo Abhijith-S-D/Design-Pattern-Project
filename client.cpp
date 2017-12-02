@@ -1,5 +1,8 @@
 #include"ObjectPool.h"
 #include"Resource.h"
+#include"IntResource.h"
+#include"StringResource.h"
+#include<cstring>
 
 ObjectPool* ObjectPool::instance = 0;
 
@@ -8,28 +11,32 @@ int main()
 {
     ObjectPool* pool = ObjectPool::getInstance();
     Resource* one;
-    std::string* two;
-    pool->g_factory->register_class<string>("string");
-    pool->g_factory->register_class<Resource>("Resource");
+    Resource* two;
+    pool->g_factory->register_class<IntResource>("IntResource");
+    pool->g_factory->register_class<StringResource>("StringResource");
     /* Resources will be created. */
-    one = (Resource*)pool->getResource("Resource");
-    one->setValue(10);
-    std::cout << "one = " << one->getValue() << " [" << one << "]" << std::endl;
+    one = (Resource*)pool->getResource("IntResource");
+    int num=10;
+    one->setValue(&num);
+    std::cout << "one = " << *(int*)(one->getValue())<< " [" << one << "]" << std::endl;
 
-    two = (std::string*)pool->getResource("string");
-    *two = "foobar";
-    std::cout << "two = " << *two << " [" << two << "]" << std::endl;
+    two = (Resource*)pool->getResource("StringResource");
+    const char* str="hello";
+    two->setValue(str);
+    std::cout << "two = " << (char*)(two->getValue()) << " [" << two << "]" << std::endl;
 
-    pool->returnResource("Resource",one);
-    pool->returnResource("string",two);
+    pool->returnResource("IntResource",one);
+    pool->returnResource("StringResource",two);
 
     /* Resources will be reused. 
      */
-    one = (Resource*)pool->getResource("Resource");
-    std::cout << "one = " << one->getValue() << " [" << one << "]" << std::endl;
+    one = pool->getResource("IntResource");
+    std::cout << "one = " << *(int*)(one->getValue()) << " [" << one << "]" << std::endl;
 
-    two = (std::string*)pool->getResource("string");
-    std::cout << "two = " << *two << " [" << two << "]" << std::endl;
+    two = pool->getResource("StringResource");
+    const char* str2="hi";
+    two->setValue(str2);
+    std::cout << "two = " << (char*)(two->getValue()) << " [" << two << "]" << std::endl;
    
     return 0;
 }
