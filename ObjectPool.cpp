@@ -14,7 +14,7 @@ using namespace std;
  */
 Resource* ObjectPool::getResource(string str)
 {
-    map<std::string,std::list<void*> >::iterator itr=resources.find(str);
+    map<std::string,std::list<Resource*> >::iterator itr=resources.find(str);
     if (itr==resources.end())
     {
         std::cout << "Creating new." << std::endl;
@@ -41,13 +41,13 @@ Resource* ObjectPool::getResource(string str)
  * @param object Resource instance.
  * @return void
  */
-void ObjectPool::returnResource(string str,void* object)
+void ObjectPool::returnResource(string str,Resource* object)
 {
-    map<std::string,std::list<void*> >::iterator itr=resources.find(str);
+    map<std::string,std::list<Resource*> >::iterator itr=resources.find(str);
     if(itr==resources.end())
     {
-    	list<void*> l;
-    	resources.insert(pair<std::string,std::list<void*> >(str,l));
+    	list<Resource*> l;
+    	resources.insert(pair<std::string,std::list<Resource*> >(str,l));
     	resources.find(str)->second.push_back(object);
     }
     else

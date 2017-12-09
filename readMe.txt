@@ -6,10 +6,10 @@ g++ -std=c++11 -o out ObjectPool.o client.o
 "output:"
 
 Creating new.
-one = 10 [0x1cb0150]
+one = 10 [0x983150]
 Creating new.
-two = foobar [0x1cb0170]
+two = hello [0x983170]
 Reusing existing.
-one = 10 [0x1cb0150]
+one = 10 [0x983150]
 Reusing existing.
-two = foobar [0x1cb0170]
+two = hi [0x983170]

@@ -11,7 +11,7 @@
 class ObjectPool
 {
     private:
-        std::map<std::string,std::list<void*> > resources;
+        std::map<std::string,std::list<Resource*> > resources;
         
         static ObjectPool* instance;
         
@@ -57,7 +57,7 @@ class ObjectPool
          * @param object Resource instance.
          * @return void
          */
-        void returnResource(std::string str,void* object);
+        void returnResource(std::string str,Resource* object);
         
         /**
          * The Destructor to avoid memory leak
