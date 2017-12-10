@@ -37,7 +37,9 @@ class StringResource:public Resource
         
         ~StringResource()
         {
-        	delete[] value;
+        	std::cout<<"deleting [" <<this<<"]"<<std::endl;
+        	if(this->value)
+        	delete[] this->value;
         }
 };
 

@@ -61,5 +61,14 @@ void ObjectPool::returnResource(string str,Resource* object)
  */
 ObjectPool::~ObjectPool()
 {
+	std::cout<<"deleting object pool[" <<this<<"]"<<std::endl;
+	for ( map<std::string,std::list<Resource*> >::iterator it = resources.begin(); it != resources.end(); ++it )
+	{
+		while(!(it->second).empty())
+		{ 
+			delete (it->second).front();
+			(it->second).pop_front();
+		}
+	}
 	resources.clear();
 }

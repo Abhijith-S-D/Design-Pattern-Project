@@ -1,6 +1,7 @@
 #ifndef IntRes
 #define IntRes
 #include"Resource.h"
+using namespace std;
 class IntResource:public Resource
 {
     int* value;
@@ -8,12 +9,12 @@ class IntResource:public Resource
     public:
         IntResource()
         {
-            value = 0;
+            value = NULL;
         }
 
         void reset()
         {
-            value = 0;
+            value = NULL;
         }
 
         void* getValue()
@@ -23,12 +24,15 @@ class IntResource:public Resource
 
         void setValue(const void* number)
         {
-            value = (int*)number;
+            value = new int;
+            *value=*((int*)number);
         }
         
         ~IntResource()
         {
-        	delete value;
+        	std::cout<<"deleting [" <<this<<"]"<<std::endl;
+        	if(this->value)
+        	delete this->value;
         }
 };
 

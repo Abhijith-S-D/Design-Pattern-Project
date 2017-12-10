@@ -2,6 +2,7 @@
 #include"Resource.h"
 #include"IntResource.h"
 #include"StringResource.h"
+#include"LifetimeTracker.h"
 #include<cstring>
 
 ObjectPool* ObjectPool::instance = 0;
@@ -9,7 +10,9 @@ ObjectPool* ObjectPool::instance = 0;
 using namespace std;
 int main()
 {
+    
     ObjectPool* pool = ObjectPool::getInstance();
+    std::cout << "pool created " << " [" << pool << "]" << std::endl;
     Resource* one;
     Resource* two;
     pool->g_factory->register_class<IntResource>("IntResource");
@@ -24,7 +27,9 @@ int main()
     const char* str="hello";
     two->setValue(str);
     std::cout << "two = " << (char*)(two->getValue()) << " [" << two << "]" << std::endl;
-
+    Private::SetLongevity((IntResource*)one,1);
+    Private::SetLongevity((StringResource*)two,2);
+    
     pool->returnResource("IntResource",one);
     pool->returnResource("StringResource",two);
 
@@ -37,6 +42,6 @@ int main()
     const char* str2="hi";
     two->setValue(str2);
     std::cout << "two = " << (char*)(two->getValue()) << " [" << two << "]" << std::endl;
-   
+    Private::AtExitFn();	
     return 0;
 }
