@@ -3,7 +3,7 @@
 #include<algorithm>
 #include<vector>
 using namespace std;
-namespace Private
+namespace Destroyer
 {
 	class LifetimeTracker
 	{

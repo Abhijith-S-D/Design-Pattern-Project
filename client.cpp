@@ -27,8 +27,8 @@ int main()
     const char* str="hello";
     two->setValue(str);
     std::cout << "two = " << (char*)(two->getValue()) << " [" << two << "]" << std::endl;
-    Private::SetLongevity((IntResource*)one,1);
-    Private::SetLongevity((StringResource*)two,2);
+    Destroyer::SetLongevity((IntResource*)one,1);
+    Destroyer::SetLongevity((StringResource*)two,2);
     
     pool->returnResource("IntResource",one);
     pool->returnResource("StringResource",two);
@@ -43,7 +43,7 @@ int main()
     const char* str2="hi";
     two->setValue(str2);
     std::cout << "two = " << (char*)(two->getValue()) << " [" << two << "]" << std::endl;
-    Private::AtExitFn();
+    Destroyer::AtExitFn();
     delete pool;	
     return 0;
 }
