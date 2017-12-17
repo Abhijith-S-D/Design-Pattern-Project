@@ -36,12 +36,14 @@ int main()
     /* Resources will be reused. 
      */
     one = pool->getResource("IntResource");
+    one->setValue(&num);
     std::cout << "one = " << *(int*)(one->getValue()) << " [" << one << "]" << std::endl;
 
     two = pool->getResource("StringResource");
     const char* str2="hi";
     two->setValue(str2);
     std::cout << "two = " << (char*)(two->getValue()) << " [" << two << "]" << std::endl;
-    Private::AtExitFn();	
+    Private::AtExitFn();
+    delete pool;	
     return 0;
 }

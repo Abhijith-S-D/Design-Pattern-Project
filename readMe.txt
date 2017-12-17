@@ -1,7 +1,4 @@
-g++ -std=c++11 -c ObjectPool.cpp
-g++ -std=c++11 -c client.cpp
-g++ -std=c++11 -o out ObjectPool.o client.o
-./out
+g++ -std=c++11 -c ObjectPool.cpp && g++ -std=c++11 -c client.cpp && g++ -std=c++11 -o out ObjectPool.o client.o && ./out
 
 "output:"
 

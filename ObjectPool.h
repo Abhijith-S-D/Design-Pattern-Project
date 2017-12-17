@@ -59,6 +59,7 @@ class ObjectPool
          */
         void returnResource(std::string str,Resource* object);
         
+        
         /**
          * The Destructor to avoid memory leak
          */

@@ -43,6 +43,7 @@ Resource* ObjectPool::getResource(string str)
  */
 void ObjectPool::returnResource(string str,Resource* object)
 {
+    object->reset();
     map<std::string,std::list<Resource*> >::iterator itr=resources.find(str);
     if(itr==resources.end())
     {

@@ -1,9 +1,8 @@
 Life design pattern
 
-The pattern stores objects of all the Factories that are registered with it. 
+The pattern stores objects of all the Factories that are registered with it.
+Only objects that extend Resources class can be put in the pattern. 
 It maintains an object pool of every reusable object which are currently not in use.
-To avoid representation, it maintains only one instance of every unique object that was created and currently not in use.
-One can specify the size of this pattern i.e. maximum number of instances this can pool.
-Once this number is reached, the oldest instance is destroyed.
-Over this users can decide on the policy of destruction of an instance inside the pattern with added dependency on other 
-instances or can even set the time of survival within the pool.
+To avoid recreation of heavy objects, it maintains instances of every unique object that was created and currently not in use.
+While returning the objects to pool their values are reset.
+One can set longetivity of the objects and these objects are destroyed according to their longetivity.
